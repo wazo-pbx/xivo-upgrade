@@ -43,7 +43,7 @@ def get_users(cur):
 
 
 def main():
-    if os.getenv('XIVO_VERSION_INSTALLED') > '18.03':
+    if os.getenv('XIVO_VERSION_INSTALLED') > '18.04':
         sys.exit(0)
 
     migration_file = '/var/lib/xivo-upgrade/migrate_xivo_user_to_wazo_user'
@@ -69,26 +69,26 @@ def main():
         user_tenant_map = get_users(cursor)
 
     # Create all tenants in wazo-auth
-    used_tenants = [manage_db_tenant_map.get(uuid) for uuid in user_tenant_map.values()]
-    auth_tenant_map = {tenant['name']: tenant['uuid'] for tenant in auth_client.tenants.list()['items']}
-    missing_tenants = set(used_tenants) - set(auth_tenant_map.keys())
-    for tenant in missing_tenants:
-        tenant_uuid = auth_client.tenants.new(name=tenant)
-        auth_tenant_map[tenant_uuid] = tenant
+    used_tenants = {manage_db_tenant_map.get(uuid) for uuid in user_tenant_map.values()}
+    auth_tenant_map = {tenant['uuid']: tenant['name'] for tenant in auth_client.tenants.list()['items']}
+    missing_tenants = used_tenants - set(auth_tenant_map.values())
+    for tenant_name in missing_tenants:
+        tenant = auth_client.tenants.new(name=tenant_name)
+        auth_tenant_map[tenant['uuid']] = tenant_name
 
     # Associate all users to their tenants
     for user_uuid, tenant_uuid in user_tenant_map.items():
-        existing_user_tenants = set(tenant['uuid'] for tenant in auth_client.users.get_tenants(user_uuid))
+        existing_user_tenants = {t['uuid'] for t in auth_client.users.get_tenants(user_uuid)['items']}
         tenant_name = manage_db_tenant_map[tenant_uuid]
         if tenant_name in existing_user_tenants:
             # The user is already associated to this tenant
             continue
 
-        auth_tenant_uuid = auth_tenant_map[tenant_name]
+        auth_tenant_uuid = [uuid for uuid, name in auth_tenant_map.items() if name == tenant_name][0]
         auth_client.tenants.add_user(auth_tenant_uuid, user_uuid)
 
         # remove all other tenants for the import users
-        existing_user_tenants.remove(tenant_name)
+        existing_user_tenants.discard(auth_tenant_uuid)
         for tenant_uuid in existing_user_tenants:
             auth_client.tenants.remove_user(tenant_uuid, user_uuid)
 
