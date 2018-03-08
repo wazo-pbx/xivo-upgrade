@@ -69,12 +69,14 @@ def main():
         user_tenant_map = get_users(cursor)
 
     # Create all tenants in wazo-auth
-    used_tenants = {manage_db_tenant_map.get(uuid) for uuid in user_tenant_map.values()}
+    manage_db_tenant_uuids = set(manage_db_tenant_map.keys())
     auth_tenant_map = {tenant['uuid']: tenant['name'] for tenant in auth_client.tenants.list()['items']}
-    missing_tenants = used_tenants - set(auth_tenant_map.values())
-    for tenant_name in missing_tenants:
-        tenant = auth_client.tenants.new(name=tenant_name)
-        auth_tenant_map[tenant['uuid']] = tenant_name
+    missing_tenants = manage_db_tenant_uuids - set(auth_tenant_map.keys())
+    for uuid_, name in manage_db_tenant_map.items():
+        if uuid_ not in missing_tenants:
+            continue
+        auth_client.tenants.new(uuid=uuid_, name=name)
+        auth_tenant_map[uuid_] = name
 
     # Associate all users to their tenants
     for user_uuid, tenant_uuid in user_tenant_map.items():
