@@ -7,7 +7,9 @@ import logging
 import os
 import sys
 import urllib3
+import psycopg2
 
+from contextlib import closing
 from xivo.chain_map import ChainMap
 from xivo.config_helper import (
     parse_config_file,
@@ -45,6 +47,13 @@ def _load_key_file(config):
     }
 
 
+def _update_source_backend_type(conn, source_uuid, backend):
+    cursor = conn.cursor()
+    query = 'UPDATE dird_source SET backend=%s WHERE uuid=%s'
+    cursor.execute(query, (backend, source_uuid))
+    conn.commit()
+
+
 def _update_source(dird_client, source_uuid, source_config):
     update_functions = {
         'csv': dird_client.csv_source.edit,
@@ -55,7 +64,7 @@ def _update_source(dird_client, source_uuid, source_config):
         'wazo': dird_client.wazo_source.edit,
     }
 
-    function = update_functions.get(source_config['backend'])
+    function = update_functions.get(source_config['type'])
     if not function:
         return
 
@@ -72,11 +81,24 @@ def _import_source(dird_client, source_config):
         'wazo': dird_client.wazo_source.create,
     }
 
-    function = create_functions.get(source_config['backend'])
+    function = create_functions.get(source_config['type'])
     if not function:
         return
 
     function(source_config)
+
+
+def _find_matching_source(existing_sources, source_name):
+    for existing_source in existing_sources:
+        if existing_source['name'] == source_name:
+            return existing_source
+
+
+def _delete_remaining_sources(conn):
+    cursor = conn.cursor()
+    query = 'DELETE dird_source WHERE backend=%s'
+    cursor.execute(query, ('migration',))
+    conn.commit()
 
 
 def main():
@@ -91,14 +113,16 @@ def main():
     token = auth_client.token.new(expiration=300)['token']
     dird_client = DirdClient(token=token, **config['dird'])
     existing_sources = dird_client.sources.list(recurse=True)['items']
-    for source_config in dird_config.values():
-        name = source_config['name']
-        for existing_source in existing_sources:
-            if name == existing_source['name']:
+    with closing(psycopg2.connect(config['db_uri'])) as conn:
+        for source_config in dird_config.values():
+            # TODO set the tenant_uuid of all sources
+            existing_source = _find_matching_source(existing_sources, source_config['name'])
+            if existing_source:
+                _update_source_backend_type(conn, existing_source['uuid'], source_config['type'])
                 _update_source(dird_client, existing_source['uuid'], source_config)
-                break
-        else:
-            _import_source(dird_client, source_config)
+            else:
+                _import_source(dird_client, source_config)
+        _delete_remaining_sources(conn)
 
 
 if __name__ == '__main__':
