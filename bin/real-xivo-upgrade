@@ -73,6 +73,7 @@ upgrade() {
 	stop_xivo
 	post_stop
 	echo "Upgrading xivo..."
+	execute apt-get install -o Dpkg::Options::="--force-confnew" -y postgresql-9.6
 	execute apt-get install -o Dpkg::Options::="--force-confnew" -y xivo-config
 	execute apt-get install -o Dpkg::Options::="--force-confnew" -y xivo-libdao xivo-ctid
 	execute apt-get dist-upgrade -y
