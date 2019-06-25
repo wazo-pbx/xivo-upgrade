@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2018-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
@@ -26,12 +26,12 @@ _DEFAULT_CONFIG = {
 EXCLUDE_SERVICES = [
     'asterisk',
     'wazo-auth',
+    'wazo-agentd-cli',
     'wazo-call-logd',
     'wazo-dird-xivo-backend',
     'wazo-plugind',
     'wazo-plugind-cli',
     'wazo-upgrade',
-    'xivo-agentd-cli',
     'xivo-agid',
     'xivo-confd',
     'xivo-ctid',
