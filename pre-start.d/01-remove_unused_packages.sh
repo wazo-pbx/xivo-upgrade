@@ -26,7 +26,8 @@ renamed_packages="wazo-dird-phoned
                   xivo-purge-db
                   xivo-agid
                   xivo-provd
-                  xivo-provd-cli"
+                  xivo-provd-cli
+                  xivo-dhcpd-update"
 
 removed_packages="python-alembic
                   wazo-admin-ui
