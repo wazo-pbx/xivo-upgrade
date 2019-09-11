@@ -2,9 +2,7 @@ etc/* etc/
 bin/real-xivo-upgrade usr/bin/
 bin/use-wazo-infrastructure usr/lib/xivo-upgrade/
 bin/wazo-upgrade usr/bin/
-bin/wazo-dist-upgrade usr/bin/
 bin/wazo-dist-upgrade-stretch usr/bin/
-bin/wazo-dist-upgrade-buster usr/bin/
 bin/wazo-dist-upgrade-buster-check usr/lib/xivo-upgrade/
 bin/wazo-dist-upgrade-stretch-check usr/lib/xivo-upgrade/
 bin/xivo-asterisk-custom-modules usr/bin/
