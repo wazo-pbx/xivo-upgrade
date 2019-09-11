@@ -113,7 +113,7 @@ def main():
     if os.getenv('XIVO_VERSION_INSTALLED') > '18.04':
         sys.exit(0)
 
-    sentinel_file = '/var/lib/wazo-upgrade/entity_tenant_migration'
+    sentinel_file = '/var/lib/xivo-upgrade/entity_tenant_migration'
     if os.path.exists(sentinel_file):
         sys.exit(1)
 

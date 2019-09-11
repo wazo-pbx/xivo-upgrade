@@ -1,0 +1,5 @@
+etc/wazo-upgrade/conf.d
+var/lib/xivo
+var/lib/xivo-upgrade
+usr/lib/xivo-upgrade
+usr/share/xivo-upgrade

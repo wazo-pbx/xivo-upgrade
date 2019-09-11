@@ -1,4 +1,4 @@
-/var/log/wazo-upgrade.log
+/var/log/xivo-upgrade.log
 {
         rotate 10
         size 100k

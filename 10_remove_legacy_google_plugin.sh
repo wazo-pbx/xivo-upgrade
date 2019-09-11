@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-sentinel="/var/lib/wazo-upgrade/10_remove_legacy_google_plugin"
+sentinel="/var/lib/xivo-upgrade/10_remove_legacy_google_plugin"
 
 [ -e "$sentinel" ] && exit 0
 

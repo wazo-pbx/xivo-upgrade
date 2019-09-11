@@ -108,7 +108,7 @@ def main():
         if version_installed > '19.02':
             sys.exit(0)
 
-    sentinel_file = '/var/lib/wazo-upgrade/25_dird_tenant_migration'
+    sentinel_file = '/var/lib/xivo-upgrade/25_dird_tenant_migration'
     if os.path.exists(sentinel_file):
         # migration already done
         sys.exit(1)

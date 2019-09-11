@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sentinel="/var/lib/wazo-upgrade/55-fix-service-discovery"
+sentinel="/var/lib/xivo-upgrade/55-fix-service-discovery"
 
 [ -e "$sentinel" ] && exit 0
 

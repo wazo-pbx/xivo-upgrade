@@ -120,16 +120,16 @@ def main():
             sys.exit(0)
 
         if version_installed <= '18.04':
-            if not os.path.exists('/var/lib/wazo-upgrade/entity_tenant_migration'):
+            if not os.path.exists('/var/lib/xivo-upgrade/entity_tenant_migration'):
                 print('load-wazo-user-external-api-from-file: 002-create-tenants-from-entities.py should be executed first')
                 sys.exit(1)
 
-    sentinel_file = '/var/lib/wazo-upgrade/migrate_xivo_service_to_wazo_user'
+    sentinel_file = '/var/lib/xivo-upgrade/migrate_xivo_service_to_wazo_user'
     if os.path.exists(sentinel_file):
         # migration already done
         sys.exit(0)
 
-    user_file = '/var/lib/wazo-upgrade/xivo_service_dump.json'
+    user_file = '/var/lib/xivo-upgrade/xivo_service_dump.json'
     if not os.path.exists(user_file):
         print('xivo_service_user migration failed: File {} does not exist.'.format(user_file))
         sys.exit(-1)

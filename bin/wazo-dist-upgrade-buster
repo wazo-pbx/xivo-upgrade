@@ -2,7 +2,7 @@
 # Copyright 2017-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-LOGFILE="/var/log/wazo-upgrade.log"
+LOGFILE="/var/log/xivo-upgrade.log"
 export DEBIAN_FRONTEND=noninteractive
 export APT_LISTCHANGES_FRONTEND=none
 
@@ -55,7 +55,7 @@ differed_action() {
     local state=$1
     export XIVO_VERSION_INSTALLED=19.12
     shopt -qs nullglob  # avoid warning when action directory has no scripts
-    for script in /usr/share/wazo-upgrade/$state.d/* ; do
+    for script in /usr/share/xivo-upgrade/$state.d/* ; do
 		    echo "Executing upgrade script $script..."
         $script
     done
@@ -127,11 +127,11 @@ maybe_dist_upgrade() {
     fetch_wazo_versions
     display_upgrade_notice
     display_wazo_versions
-    if ! /usr/lib/wazo-upgrade/wazo-dist-upgrade-buster-check $force ; then
+    if ! /usr/lib/xivo-upgrade/wazo-dist-upgrade-buster-check $force ; then
         return
     fi
     dist_upgrade
-    wazo-check-conffiles
+    xivo-check-conffiles
     display_reboot_notice
 }
 

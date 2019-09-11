@@ -28,7 +28,7 @@ then
     systemctl restart wazo-auth
     wait_until_ready
     if [ $? -ne 0 ]; then
-        echo "Cannot start wazo-auth, please fix wazo-auth, re-run /usr/share/wazo-upgrade/pre-start.d/00* scripts and re-run wazo-upgrade"
+        echo "Cannot start wazo-auth, please fix wazo-auth, re-run /usr/share/xivo-upgrade/pre-start.d/00* scripts and re-run wazo-upgrade"
         exit -1
     fi
 fi

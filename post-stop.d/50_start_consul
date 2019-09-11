@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # When upgrading from a slave, consul does not run. We need it to run during
-# wazo-upgrade (e.g. for xivo-manage-tokens).
+# xivo-upgrade (e.g. for xivo-manage-tokens).
 #
 # If the slave is XiVO < 15.18, consul is also disabled and we want to re-enable
 # it for the last time.

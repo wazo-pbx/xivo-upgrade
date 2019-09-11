@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-sentinel="/var/lib/wazo-upgrade/10_remove_legacy_push_mobile_v2"
+sentinel="/var/lib/xivo-upgrade/10_remove_legacy_push_mobile_v2"
 
 [ -e "$sentinel" ] && exit 0
 

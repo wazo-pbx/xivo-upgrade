@@ -225,7 +225,7 @@ def main():
         if version_installed >= '19.08':
             sys.exit(0)
 
-    sentinel_file = '/var/lib/wazo-upgrade/dird-auto-create-config-v3'
+    sentinel_file = '/var/lib/xivo-upgrade/dird-auto-create-config-v3'
     if os.path.exists(sentinel_file):
         # migration already done
         sys.exit(1)

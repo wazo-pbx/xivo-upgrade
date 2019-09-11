@@ -2,7 +2,7 @@
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 
-LOGFILE="/var/log/wazo-upgrade.log"
+LOGFILE="/var/log/xivo-upgrade.log"
 DATEFORMAT="%Y-%m-%d_%H:%M:%S"
 
 check_package_is_available()
@@ -21,8 +21,8 @@ check_debian_mirror_is_available()
 
 check_wazo_mirror_is_available()
 {
-    if ! check_package_is_available wazo-upgrade ; then
-        echo 'Could not find any Wazo repository to download "wazo-upgrade" from. Check your /etc/apt/sources.list.d or run "xivo-dist phoenix".'
+    if ! check_package_is_available xivo-upgrade ; then
+        echo 'Could not find any Wazo repository to download "xivo-upgrade" from. Check your /etc/apt/sources.list.d or run "xivo-dist phoenix".'
         return 1
     fi
 }
@@ -33,9 +33,9 @@ run_upgrade()
     check_debian_mirror_is_available || return 1
     check_wazo_mirror_is_available || return 1
     echo "Upgrading wazo-upgrade"
-    apt-get install -y wazo-upgrade
+    apt-get install -y xivo-upgrade
 
-    /usr/bin/real-wazo-upgrade "$@"
+    /usr/bin/real-xivo-upgrade "$@"
 }
 
 append_log_start()

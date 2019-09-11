@@ -8,10 +8,10 @@ set -o pipefail  # fail if command before pipe fails
 
 export DEBIAN_FRONTEND="${DEBIAN_FRONTEND:=noninteractive}"
 
-TENANT_MIGRATION='/var/lib/wazo-upgrade/entity_tenant_migration'
-USER_MIGRATION='/var/lib/wazo-upgrade/migrate_xivo_user_to_wazo_user'
-SERVICE_MIGRATION='/var/lib/wazo-upgrade/migrate_xivo_service_to_wazo_user'
-ADMIN_MIGRATION='/var/lib/wazo-upgrade/migrate_xivo_admin_to_wazo_user'
+TENANT_MIGRATION='/var/lib/xivo-upgrade/entity_tenant_migration'
+USER_MIGRATION='/var/lib/xivo-upgrade/migrate_xivo_user_to_wazo_user'
+SERVICE_MIGRATION='/var/lib/xivo-upgrade/migrate_xivo_service_to_wazo_user'
+ADMIN_MIGRATION='/var/lib/xivo-upgrade/migrate_xivo_admin_to_wazo_user'
 
 if [ $XIVO_VERSION_INSTALLED \< '18.04' ]
 then

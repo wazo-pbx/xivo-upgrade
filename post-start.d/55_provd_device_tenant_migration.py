@@ -115,7 +115,7 @@ def main():
         if version_installed >= '19.04':
             sys.exit(0)
 
-    sentinel_file = '/var/lib/wazo-upgrade/55_provd_device_tenant_migration'
+    sentinel_file = '/var/lib/xivo-upgrade/55_provd_device_tenant_migration'
     if os.path.exists(sentinel_file):
         # migration already done
         sys.exit(1)

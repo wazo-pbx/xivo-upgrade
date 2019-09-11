@@ -84,7 +84,7 @@ def main():
         if version_installed >= '19.07':
             sys.exit(0)
 
-    sentinel_file = '/var/lib/wazo-upgrade/60-provd-remove-null-values-config'
+    sentinel_file = '/var/lib/xivo-upgrade/60-provd-remove-null-values-config'
     if os.path.exists(sentinel_file):
         # migration already done
         sys.exit(1)

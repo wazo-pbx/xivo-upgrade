@@ -14,7 +14,7 @@ from xivo.chain_map import ChainMap
 from xivo.config_helper import read_config_file_hierarchy, parse_config_file
 
 SCRIPT_NAME = os.path.basename(sys.argv[0])
-SCRIPT_EXEC = os.path.join('/', 'var', 'lib', 'wazo-upgrade', SCRIPT_NAME)
+SCRIPT_EXEC = os.path.join('/', 'var', 'lib', 'xivo-upgrade', SCRIPT_NAME)
 
 logger = logging.getLogger('autoprov_config_migration')
 logging.basicConfig(level=logging.INFO)

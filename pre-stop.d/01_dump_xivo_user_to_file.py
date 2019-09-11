@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2017-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import json
@@ -88,15 +88,15 @@ def main():
     if os.getenv('XIVO_VERSION_INSTALLED') > '18.04':
         sys.exit(0)
 
-    migration_file = '/var/lib/wazo-upgrade/migrate_xivo_user_to_wazo_user'
+    migration_file = '/var/lib/xivo-upgrade/migrate_xivo_user_to_wazo_user'
     if os.path.exists(migration_file):
         # migration already done
         sys.exit(0)
 
-    user_filename = '/var/lib/wazo-upgrade/xivo_user_dump.json'
+    user_filename = '/var/lib/xivo-upgrade/xivo_user_dump.json'
     if os.path.exists(user_filename):
         print('execute the following script before upgrading your wazo:')
-        print('/usr/share/wazo-upgrade/post-start.d/23_load_wazo_user_from_file.py -f')
+        print('/usr/share/xivo-upgrade/post-start.d/23_load_wazo_user_from_file.py -f')
         sys.exit(-1)
 
     with closing(psycopg2.connect(db_uri)) as conn:

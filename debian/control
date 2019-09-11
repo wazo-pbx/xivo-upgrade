@@ -1,18 +1,12 @@
-Source: wazo-upgrade
+Source: xivo-upgrade
 Section: admin
 Priority: extra
 Maintainer: Wazo Maintainers <dev.wazo@gmail.com>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
 
-Package: wazo-upgrade
-Architecture: all
-Depends: ${misc:Depends}, rename
-Description: Wazo upgrade tools
- This package provide Wazo upgrading tools
-
 Package: xivo-upgrade
 Architecture: all
-Depends: ${misc:Depends}, wazo-upgrade
-Description: Wazo upgrade tools (dummy package)
- dummy package to automatically update to wazo-upgrade
+Depends: ${misc:Depends}
+Description: Wazo upgrade tools
+ This package provide Wazo upgrading tools

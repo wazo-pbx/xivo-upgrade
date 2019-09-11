@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright 2016-2019 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2016-2017 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 set -e
@@ -224,5 +224,5 @@ deb $deb_line
 # deb-src $deb_line
 EOF
 
-echo 'Launching wazo-upgrade'
-wazo-upgrade "$@"
+echo 'Launching xivo-upgrade'
+xivo-upgrade "$@"
