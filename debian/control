@@ -7,6 +7,6 @@ Standards-Version: 3.9.6
 
 Package: xivo-upgrade
 Architecture: all
-Depends: ${misc:Depends}, aptitude, monit, python-psycopg2
+Depends: ${misc:Depends}, aptitude, monit, python-psycopg2, wazo-dist-upgrade
 Description: Wazo upgrade tools
  This package provide Wazo upgrading tools
