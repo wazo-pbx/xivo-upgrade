@@ -313,6 +313,7 @@ check_wizard_has_been_run
 if [ $(xivo_version_installed) \< '18.04' ]; then
     if ! is_wazo_dev_or_rc_stretch; then
         echo "Switching to pelican-stretch distribution"
+        apt-get install -o Dpkg::Options::="--force-confnew" -y xivo-dist
         wazo-dist -m pelican-stretch
     fi
     apt-get update > /dev/null
