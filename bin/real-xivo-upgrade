@@ -227,7 +227,7 @@ display_buster_notice() {
 
 	****************************************************************************
 	*                                                                          *
-	*  The Debian GNU/Linux system must be upgraded from version 9 (Stretch)    *
+	*  The Debian GNU/Linux system must be upgraded from version 9 (Stretch)   *
 	*  to 10 (Buster). This is mandatory to upgrade to newer versions of Wazo. *
 	*  To do this, you must run the following command:                         *
 	*                                                                          *
