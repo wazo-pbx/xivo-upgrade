@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2011-2018 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2011-2019 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
@@ -71,6 +71,7 @@ upgrade() {
 		exec_wheezy_to_jessie_migration
 	else
 		execute apt-get install -o Dpkg::Options::="--force-confnew" -y xivo-config
+		execute apt-get install -o Dpkg::Options::="--force-confnew" -y --force-yes postgresql-9.4/phoenix postgresql-contrib-9.4/phoenix postgresql-plpython-9.4/phoenix
 		execute apt-get install -o Dpkg::Options::="--force-confnew" -y xivo-libdao xivo-ctid
 		execute apt-get dist-upgrade -y
 		apt-get autoremove -y
@@ -334,6 +335,7 @@ exec_wheezy_to_jessie_migration() {
 	apt-get upgrade --yes --force-yes -o Dpkg::Options::="--force-confnew"
 	apt-get install --yes --force-yes -o Dpkg::Options::="--force-confnew" alembic/jessie python-alembic/jessie rabbitmq-server/jessie python-aniso8601/jessie python-blinker/jessie python-flask-httpauth/jessie
 	apt-mark manual postgresql postgresql-contrib
+	apt-get install --yes --force-yes -o Dpkg::Options::="--force-confnew" postgresql-9.4/phoenix postgresql-contrib-9.4/phoenix postgresql-plpython-9.4/phoenix
 	apt-get install --yes --force-yes -o Dpkg::Options::="--force-confnew" xivo
 	apt-get dist-upgrade --yes --force-yes -o Dpkg::Options::="--force-confnew"
 	trap ERR
