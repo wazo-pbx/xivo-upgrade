@@ -1,4 +1,4 @@
-# wazo-upgrade
+# xivo-upgrade
 
 This repository is deprecated. See https://github.com/wazo-platform/wazo-upgrade for the latest version.
 
