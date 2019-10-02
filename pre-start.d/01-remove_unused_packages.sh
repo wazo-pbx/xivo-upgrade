@@ -20,6 +20,7 @@ renamed_packages="wazo-dird-phoned
                   xivo-websocketd
                   xivo-dird-phoned
                   xivo
+                  xivo-sounds
                   xivo-base
                   xivo-confd
                   xivo-agentd
